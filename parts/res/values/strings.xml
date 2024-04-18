@@ -2,14 +2,20 @@
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     
-    <!-- HBM -->
+    <!-- Oled Features -->
+    <string name="oled_features_title">Additional OLED Features</string>    
+    <string name="oled_features_summary">Extra features for your phone\'s display</string>
+    <string name="oled_features_info">High Brightness Mode (HBM) increases the maximum brightness of the display to improve visibility under sunlight but increases power consumption.\nDC Dimming reduces eye strain in low light conditions but reduces image quality.</string>
+
     <string name="oled_hbm_title">High Brightness Mode</string>
     <string name="oled_hbm_summary">Increase screen brightness under sunlight</string>
     <string name="oled_hbm_tile_title">HBM</string>
     <string name="oled_hbm_title_enabled">Enabled</string>
     <string name="oled_hbm_title_disabled">Disabled</string>
-    <string name="oled_hbm_info">High Brightness Mode (HBM) increases the maximum brightness of the display to improve visibility under sunlight. Increases power consumption.</string>
-    <string name="kernel_not_supported">Kernel did not support this feature</string>
+
+    <string name="oled_dcdimming_title">DC Dimming</string>
+
+    <string name="kernel_not_supported">Kernel does not support this feature</string>
 
     <!-- Refresh Rate  -->
     <string name="refresh_title">Refresh rate per-app</string>

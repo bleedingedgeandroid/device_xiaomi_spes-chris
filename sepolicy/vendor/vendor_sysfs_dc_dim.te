@@ -1,0 +1,2 @@
+# DC dimming
+allow system_app vendor_sysfs_dc_dim:file { getattr open write };

@@ -26,12 +26,12 @@ import android.service.quicksettings.TileService;
 import co.aospa.settings.R;
 import co.aospa.settings.utils.FileUtils;
 
-public class HbmTileService extends TileService {
+public class DcDimmingTileService extends TileService {
 
     private Context context;
     private Tile tile;
 
-    private int currentHbmMode;
+    private int currentDcDimmingMode;
 
     @Override
     public void onCreate() {
@@ -39,17 +39,17 @@ public class HbmTileService extends TileService {
         context = getApplicationContext();
     }
 
-    private void updateCurrentHbmMode() {
-        currentHbmMode = SystemProperties.getInt(HBM_PROP, MODE_OFF);
+    private void updateCurrentDcDimmingMode() {
+        currentDcDimmingMode = SystemProperties.getInt(DC_DIMMING_PROP, MODE_OFF);
     }
 
-    private void updateHbmTile() {
+    private void updateDcDimmingTile() {
         String enabled = context.getResources().getString(R.string.oled_hbm_title_enabled);
         String disabled = context.getResources().getString(R.string.oled_hbm_title_disabled);
 
-        tile.setState(currentHbmMode != 0 ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
-        tile.setContentDescription(currentHbmMode != 0 ? enabled : disabled);
-        tile.setSubtitle(currentHbmMode != 0 ?  enabled : disabled);
+        tile.setState(currentDcDimmingMode != 0 ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
+        tile.setContentDescription(currentDcDimmingMode != 0 ? enabled : disabled);
+        tile.setSubtitle(currentDcDimmingMode != 0 ?  enabled : disabled);
         tile.updateTile();
     }
 
@@ -57,22 +57,24 @@ public class HbmTileService extends TileService {
     public void onStartListening() {
         super.onStartListening();
         tile = getQsTile();
-        if (!FileUtils.fileExists(HBM_NODE)) {
+        if (!FileUtils.fileExists(DC_DIMMING_NODE)) {
             tile.setState(Tile.STATE_UNAVAILABLE);
             tile.setSubtitle(getResources().getString(R.string.kernel_not_supported));
             tile.updateTile();
             return;
         }
-        updateCurrentHbmMode();
-        updateHbmTile();
+        
+        updateCurrentDcDimmingMode();
+        updateDcDimmingTile();
     }
 
     @Override
     public void onClick() {
         super.onClick();
-        updateCurrentHbmMode();
-        currentHbmMode = currentHbmMode != MODE_ON ? MODE_ON : MODE_OFF;
-        SystemProperties.set(HBM_PROP, Integer.toString(currentHbmMode));
-        updateHbmTile();
+        updateCurrentDcDimmingMode();
+        currentDcDimmingMode = currentDcDimmingMode != MODE_ON ? MODE_ON : MODE_OFF;
+        FileUtils.writeLine(DC_DIMMING_NODE, String.valueOf(currentDcDimmingMode == MODE_ON ? MODE_ON : MODE_OFF));
+        SystemProperties.set(DC_DIMMING_PROP, Integer.toString(currentDcDimmingMode));
+        updateDcDimmingTile();
     }
 }

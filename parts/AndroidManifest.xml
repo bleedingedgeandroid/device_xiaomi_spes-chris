@@ -30,7 +30,7 @@
     <activity
             android:name=".display.OledFeaturesPreferenceActivity"
             android:exported="true"
-            android:label="@string/oled_hbm_title"
+            android:label="@string/oled_features_title"
             android:theme="@style/Theme.SubSettingsBase">
             <intent-filter>
                 <action android:name="com.android.settings.action.IA_SETTINGS" />
@@ -40,7 +40,7 @@
                 android:value="com.android.settings.category.ia.display" />
             <meta-data
                 android:name="com.android.settings.summary"
-                android:resource="@string/oled_hbm_tile_title" />
+                android:resource="@string/oled_features_summary" />
         </activity>
 
         <service
@@ -52,7 +52,18 @@
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE"/>
             </intent-filter>
-           </service>
+        </service>
+
+        <service
+            android:name=".display.DcDimmingTileService"
+            android:exported="true"
+            android:icon="@drawable/ic_dcdimming"
+            android:label="@string/oled_dcdimming_title"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE"/>
+            </intent-filter>
+        </service>
 
     <activity
             android:name=".refreshrate.RefreshActivity"
