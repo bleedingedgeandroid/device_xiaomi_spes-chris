@@ -147,3 +147,6 @@ $(call inherit-product, vendor/xiaomi/spes/spes-vendor.mk)
 
 # Inherit from sm6225-common
 $(call inherit-product, device/xiaomi/sm6225-common/common.mk)
+
+# Include my signing keys
+-include vendor/pugzarecute/signingkeys/keys.mk
